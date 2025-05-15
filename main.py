@@ -3,7 +3,7 @@
 #Date:      05/13/2025
 #Purpose:   The main document for my game, includes the initialization of most of the important variables as well as the main game loop 
 
-import pygame, time, random
+import pygame, time, random, os
 from fly import *
 from frog import *
 from text import *
@@ -13,16 +13,28 @@ from lazer import *
 pygame.init()
 surface = pygame.display.set_mode((800,600))
 
+def getHighScore():
+    try:
+        f = open(".highscore.txt", "r")
+        return int(f.readline())
+    except:
+        return 0
+
+def setHighScore(new):
+    f = open(".highscore.txt", "w")
+    f.write(f"{new}")
+
 #Instantiating Important Classes 
 mayFly = Fly(400, 400, 10, (0, 0, 0))
 froggy = Frog(400,300)
 scoreboard = Text("Score: 0",10,10)
 gameover = Text("Game Over", 280, 200,(255,255,255),40)
 score = Text("Score: 0",300,250,(255,255,255),25)
+highscore = Text("Highscore: 00000000",300,300,(255,255,255),25)
 health = Text("Health: 10", 10, 40)
+high = getHighScore() 
 
 #Instantiating essential variables
-numEaten = 0
 frame = 0
 startTime = 0
 attack = 0
@@ -40,8 +52,13 @@ while running:
     if mayFly.getHealth() < 1:
         surface.fill((200,0,0))
         score.setMessage(f"Score: {frame}")
+        if frame > high:
+            setHighScore(frame)
+            high= frame
+        highscore.setMessage(f"HighScore: {high}")
         gameover.draw(surface)
         score.draw(surface)
+        highscore.draw(surface)
 
     else:
         frame += 1
