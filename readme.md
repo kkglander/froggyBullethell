@@ -1,3 +1,4 @@
+```
 Name:   Karl Glander
 ID:     kg338
 Date:   05/13/2025
@@ -19,5 +20,5 @@ Score is given as you are currently alive, which means that longer that you stay
 You lose when your health goes to zero, so be careful!
 This can only happen when you collide with projectiles or lazers so utilze your movment to avoid damage.
 After you lose, your score for the run will be displayed.
-
+```
 ![game-screenshot](https://i.imgur.com/wq9gcGD.png)
