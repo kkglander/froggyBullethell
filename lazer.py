@@ -7,13 +7,12 @@ from drawable import *
 import math, pygame
 
 class lazer(Drawable):
-    def __init__(self, start, end, warningmode=False, rad=0.0, width=5, color=(255, 0, 0)):
-        self.__start = start
-        self.__end = end
+    def __init__(self, origin,length, rad=0.0, width=5, color=(255, 0, 0)):
+        self.__origin = origin
+        self.__length = length
         self.__rad = rad
         self.__color = color
         self.__width = width
-        self.__warning = warningmode
 
     def get_rect(self,surface):
         #Because I need to use polygons for collision this method doesn't really work for me, I hope that doesn't dock me points
@@ -24,9 +23,12 @@ class lazer(Drawable):
 
 
     def draw(self, surface):
-        x1, y1 = self.__start
-        x2, y2 = self.__end
-    
+        x1, y1 = self.__origin
+        #to get a line = length * sin or cos (rad)
+        x2 = x1 + self.__length * math.cos(self.__rad)
+        y2 = y1 - self.__length * math.sin(self.__rad)
+
+
         # Direction vector
         dx = x2 - x1
         dy = y2 - y1
@@ -50,11 +52,7 @@ class lazer(Drawable):
         ]
         self.__points = points
         
-        if self.__warning:
-            pygame.draw.polygon(surface, self.__color, points, 1)
-        else:
-            pygame.draw.polygon(surface, self.__color, points)
-
+        pygame.draw.polygon(surface, self.__color, points)
 
 
     def collision(self, target):
@@ -67,12 +65,12 @@ class lazer(Drawable):
     def spin(self):
         self.__rad += 0.01
         self.__rad %= 6.28
-        x, y = self.__start
-
-        length = 500
-        x += length * math.cos(self.__rad)
-        y -= length * math.sin(self.__rad)
-        self.__end = ((x, y))
+        # x, y = self.__start
+        #
+        # length = 500
+        # x += length * math.cos(self.__rad)
+        # y -= length * math.sin(self.__rad)
+        # self.__end = ((x, y))
     
     def isWarn(self):
         self.__warning = not self.__warning

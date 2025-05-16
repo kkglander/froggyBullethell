@@ -3,7 +3,7 @@
 #Date:      05/13/2025
 #Purpose:   The main document for my game, includes the initialization of most of the important variables as well as the main game loop 
 
-import pygame, time, random, os
+import pygame, time, random
 from fly import *
 from frog import *
 from text import *
@@ -109,10 +109,10 @@ while running:
             attack = choose(4)
             if attack == 1:
                 #instantiating lazers for attack 2 so that it can just focus on spinning them
-                lazers.append(lazer((400,300),(500,300), False,0))
-                lazers.append(lazer((400,300),(300,300), False,3.14))
-                lazers.append(lazer((400,300),(500,300), False,1.57))
-                lazers.append(lazer((400,300),(300,300), False,-1.57))
+                lazers.append(lazer((400,300),500,0))
+                lazers.append(lazer((400,300),500,3.14))
+                lazers.append(lazer((400,300),500,1.57))
+                lazers.append(lazer((400,300),500,-1.57))
                     
     
         if attack == 0:

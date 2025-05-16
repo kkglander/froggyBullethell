@@ -45,14 +45,6 @@ class Drawable(ABC):
         else:
             self.__visible = False
 
-    def intersects(self, other):
-        rect1 = self.get_rect()
-        rect2 = other.get_rect()
-        if (rect1.x < rect2.x + rect2.width) and (rect1.x + rect1.width > rect2.x) and (rect1.y < rect2.y + rect2.height) \
-and (rect2.height + rect1.y > rect2.y):
-            return True
-        return False
-
     def SAT(self, poly1, poly2):#SEPERATING AXIS THEROM
         #The comments below is not only to demonstate that I understand what the code is doing but also for myself so that by writing it, I might understand it better
 
